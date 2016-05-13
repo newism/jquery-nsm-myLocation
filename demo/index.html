@@ -1,0 +1,171 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>My Location Services</title>
+</head>
+
+<body>
+    <div class="MyLocation">
+
+        <h1>My Location</h1>
+
+        <form class="js-myLocation-form" action="#">
+            <span class="js-myLocation-location">Unknown location</span>
+            <a href="#" class="js-myLocation-trigger">Use precise location</a>
+        </form>
+
+        <h2>Current Location</h2>
+        Latitude: <input type="text" class="js-myLocation-currentLatitude" />
+        Longitude: <input type="text" class="js-myLocation-currentLongitude" />
+        Latitude/Longitude: <input type="text" class="js-myLocation-currentLatLng" />
+
+        <h2>Example Sensor Emulation Locations</h2>
+        <ul>
+            <li>Noosa Heads QLD: -26.4001618,153.0609379</li>
+            <li>Chatswood NSW: -33.7956557,151.1741829</li>
+            <li>South Yarra VIC: -37.8420819,144.9568723</li>
+            <li>Glendalough WA: -31.9197976,115.8177311</li>
+            <li>Kingsland NZ: -36.8703434,174.739697</li>
+        </ul>
+
+        <h1>Location Distance</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Business</th>
+                    <th>City</th>
+                    <th>Address</th>
+                    <th>Coordinates</th>
+                    <th>Distance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>New Shanghai</td>
+                    <td>Sydney</td>
+                    <td>Shop L01 1035, Charlestown Square, Charlestown NSW 2290</td>
+                    <td>-32.9657119, 151.6940513</td>
+                    <td><span class="js-myLocation-distance" data-latitude="-32.9657119" data-longitude="151.6940513"></span></td>
+                </tr>
+                <tr>
+                    <td>Spicers Vineyards Estate | Restaurant Botanica</td>
+                    <td>Sydney</td>
+                    <td>555 Hermitage Road, Pokolbin NSW 2320</td>
+                    <td>-32.6963, 151.262</td>
+                    <td><span class="js-myLocation-distance" data-latitude="-32.6963" data-longitude="151.262"></span></td>
+                </tr>
+                <tr>
+                    <td>Ramen Ikkyu</td>
+                    <td>Sydney</td>
+                    <td>Shop F1A 401 Sussex Street, Sydney NSW 2000</td>
+                    <td>-33.878, 151.205</td>
+                    <td><span class="js-myLocation-distance" data-latitude="-33.878" data-longitude="151.205"></span></td>
+                </tr>
+                <tr>
+                    <td>Seddon Deadly Sins</td>
+                    <td>Melbourne</td>
+                    <td>148 Victoria Street, Seddon VIC 3011</td>
+                    <td>-37.8048, 144.892</td>
+                    <td><span class="js-myLocation-distance" data-latitude="-37.8048" data-longitude="144.892"></span></td>
+                </tr>
+                <tr>
+                    <td>8Bit | CBD</td>
+                    <td>Melbourne</td>
+                    <td>231 Swanston Street, Melbourne VIC 3000</td>
+                    <td>-37.8126, 144.965</td>
+                    <td><span class="js-myLocation-distance" data-latitude="-37.8126" data-longitude="144.965"></span></td>
+                </tr>
+                <tr>
+                    <td>Crowded House</td>
+                    <td>Melbourne</td>
+                    <td>48 Ferguson Street, Williamstown VIC 3016</td>
+                    <td>-37.8588, 144.899</td>
+                    <td><span class="js-myLocation-distance" data-latitude="-37.8588" data-longitude="144.899"></span></td>
+                </tr>
+                <tr>
+                    <td>The Tamarind, Spicers Tamarind Retreat</td>
+                    <td>Brisbane</td>
+                    <td>88 Obi Ln South, Maleny QLD 4552</td>
+                    <td>-26.7611, 152.874</td>
+                    <td><span class="js-myLocation-distance" data-latitude="-26.7611" data-longitude="152.874"></span></td>
+                </tr>
+                <tr>
+                    <td>Hedge Espresso</td>
+                    <td>Brisbane</td>
+                    <td>94-96 Lillian Avenue, Salisbury QLD 4107</td>
+                    <td>-27.5536, 153.025</td>
+                    <td><span class="js-myLocation-distance" data-latitude="-27.5536" data-longitude="153.025"></span></td>
+                </tr>
+                <tr>
+                    <td>Bazaar | QT Gold Coast Hotel</td>
+                    <td>Brisbane</td>
+                    <td>7 Staghorn Avenue, Surfers Paradise QLD 4217</td>
+                    <td>-27.9946, 153.429</td>
+                    <td><span class="js-myLocation-distance" data-latitude="-27.9946" data-longitude="153.429"></span></td>
+                </tr>
+                <tr>
+                    <td>Collodel Ice Cream & Sorbet</td>
+                    <td>Perth</td>
+                    <td>30 Haynes Street, Kalamunda WA 6076</td>
+                    <td>-31.971,116.058</td>
+                    <td><span class="js-myLocation-distance" data-latitude="-31.971" data-longitude="116.058"></span></td>
+                </tr>
+                <tr>
+                    <td>Timber Cafe</td>
+                    <td>Perth</td>
+                    <td>51 Wright Road, Harrisdale WA 6112</td>
+                    <td>-32.1115, 115.936</td>
+                    <td><span class="js-myLocation-distance" data-latitude="-32.1115" data-longitude="115.936"></span></td>
+                </tr>
+                <tr>
+                    <td>Michael Brothers</td>
+                    <td>Perth</td>
+                    <td>55 Benara Road, Caversham WA 6055</td>
+                    <td>-31.8781, 115.969</td>
+                    <td><span class="js-myLocation-distance" data-latitude="-31.8781" data-longitude="115.969"></span></td>
+                </tr>
+                <tr>
+                    <td>Matakana Market Kitchen</td>
+                    <td>Auckland</td>
+                    <td>2 Matakana Valley Road Matakana NZ 0985</td>
+                    <td>-36.3521, 174.718</td>
+                    <td><span class="js-myLocation-distance" data-latitude="-36.3521" data-longitude="174.718"></span></td>
+                </tr>
+                <tr>
+                    <td>Chinoiserie</td>
+                    <td>Auckland</td>
+                    <td>4 Owairaka Avenue, Mt Albert NZ 1025</td>
+                    <td>-36.8941, 174.727</td>
+                    <td><span class="js-myLocation-distance" data-latitude="-36.8941" data-longitude="174.727"></span></td>
+                </tr>
+                <tr>
+                    <td>The Piha Cafe</td>
+                    <td>Auckland</td>
+                    <td>20 Seaview Road, Piha NZ 0772</td>
+                    <td>-36.9534, 174.473</td>
+                    <td><span class="js-myLocation-distance" data-latitude="-36.9534" data-longitude="174.473"></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/jquery-ui/ui/core.js"></script>
+    <script src="../bower_components/jquery-ui/ui/widget.js"></script>
+    <script src="../bower_components/js-cookie/src/js.cookie.js"></script>
+    <script src="../src/jquery.nsm.myLocation.js"></script>
+
+    <script>
+        $('body').on('contentcreated', function (event) {
+            event.stopPropagation();
+            var $el = $(event.target),
+                myLocation = $el.find('.MyLocation').myLocation();
+        }).trigger('contentcreated');
+    </script>
+
+</body>
+</html>
