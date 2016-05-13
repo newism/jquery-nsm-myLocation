@@ -85,6 +85,11 @@
                 coords = widget._getCookieCoords(),
                 currentLocationString = widget._getCookieLocationString();
 
+            // not a valid coords object? exit
+            if (false === coords) {
+                return;
+            }
+
             // update the text contents of the distance placeholders
             jqDistancePlaceholders.each(function() {
                 widget._renderDistancePlaceholder(this, coords);
@@ -195,55 +200,55 @@
                 var userInput = false,
                     coords = false,
                     getLatLngForUserInput = function(userInputParam) {
-                    // give the user the option to specify a post code instead
-                    geocoder.geocode({
-                        address: userInputParam,
-                        region: widget.options.regionBias
-                    }, function (results, status) {
+                        // give the user the option to specify a post code instead
+                        geocoder.geocode({
+                            address: userInputParam,
+                            region: widget.options.regionBias
+                        }, function (results, status) {
 
-                        // the geocode was successful
-                        if (status === google.maps.GeocoderStatus.OK) {
-                            // find the result matching our targeted specificity
-                            var targetResult = widget._getTargetResult(results);
+                            // the geocode was successful
+                            if (status === google.maps.GeocoderStatus.OK) {
+                                // find the result matching our targeted specificity
+                                var targetResult = widget._getTargetResult(results);
 
-                            // we got one, now process it
-                            if (targetResult) {
+                                // we got one, now process it
+                                if (targetResult) {
 
-                                // prepare the new coordinates object
-                                coords = {
-                                    latitude: targetResult.geometry.location.lat(),
-                                    longitude: targetResult.geometry.location.lng(),
-                                    length: 2
-                                };
+                                    // prepare the new coordinates object
+                                    coords = {
+                                        latitude: targetResult.geometry.location.lat(),
+                                        longitude: targetResult.geometry.location.lng(),
+                                        length: 2
+                                    };
 
-                                // this part differs from normal success method - save coordinates back to the cookie
-                                widget._setCookieCoords(coords);
+                                    // this part differs from normal success method - save coordinates back to the cookie
+                                    widget._setCookieCoords(coords);
 
-                                // we can fetch the formatted_address as we know how specific we want to be
-                                var addressString = targetResult.formatted_address;
+                                    // we can fetch the formatted_address as we know how specific we want to be
+                                    var addressString = targetResult.formatted_address;
 
-                                // update the city name in the cookie
-                                widget._setCookieLocationString(addressString);
+                                    // update the city name in the cookie
+                                    widget._setCookieLocationString(addressString);
 
-                                // fire an event for the place change
-                                widget._trigger('locationchanged', event, { coords: coords, location: targetResult });
+                                    // fire an event for the place change
+                                    widget._trigger('locationchanged', event, { coords: coords, location: targetResult });
+
+                                } else {
+                                    // no result matched the targeted criteria
+                                    window.alert('No results found');
+                                }
 
                             } else {
-                                // no result matched the targeted criteria
-                                window.alert('No results found');
-                            }
+                                // the geocoder returned an error
+                                userInput = window.prompt(widget.options.lang.reverseGeocodeFailureMatchingUserInput);
 
-                        } else {
-                            // the geocoder returned an error
-                            userInput = window.prompt(widget.options.lang.reverseGeocodeFailureMatchingUserInput);
-
-                            // if a value was supplied then try and geocode it
-                            if (userInput) {
-                                getLatLngForUserInput(userInput);
+                                // if a value was supplied then try and geocode it
+                                if (userInput) {
+                                    getLatLngForUserInput(userInput);
+                                }
                             }
-                        }
-                    });
-                };
+                        });
+                    };
 
                 // is this an eventless action and has the user already been asked for their location? if so exit
                 if (undefined === event && true === widget._getCookieLocationPromptShown()) {
