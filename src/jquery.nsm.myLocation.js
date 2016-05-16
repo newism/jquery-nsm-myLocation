@@ -29,7 +29,7 @@
                 distancePlaceholderActive: 'is-active'
             },
             lang: {
-                updateLocationText: 'Update location',
+                updateLocationText: 'Update',
                 distanceSuffix: ' K',
                 reverseGeocodeFailurePromptUserInput: 'Sorry, we weren\'t able to detect your location. Would you like to enter a suburb or postcode instead?',
                 reverseGeocodeFailureMatchingUserInput: 'Sorry, we couldn\'t find any places matching your input. Would you like to enter another suburb or postcode?'
@@ -75,13 +75,15 @@
 
         },
 
-        _handleLocationChanged: function(event) {
+        render: function(target) {
             var widget = this,
-                jqDistancePlaceholders = widget.element.find(widget.options.selectors.distancePlaceholder),
-                jqCurrentLatitudeInputs = widget.element.find(widget.options.selectors.currentLatitudeInput),
-                jqCurrentLongitudeInputs = widget.element.find(widget.options.selectors.currentLongitudeInput),
-                jqCurrentLatLngInputs = widget.element.find(widget.options.selectors.currentLatLngInput),
-                jqLocationText = widget.element.find(widget.options.selectors.locationText);
+                jqTarget = (target ? $(target) : widget.element),
+                jqDistancePlaceholders = jqTarget.find(widget.options.selectors.distancePlaceholder),
+                jqCurrentLatitudeInputs = jqTarget.find(widget.options.selectors.currentLatitudeInput),
+                jqCurrentLongitudeInputs = jqTarget.find(widget.options.selectors.currentLongitudeInput),
+                jqCurrentLatLngInputs = jqTarget.find(widget.options.selectors.currentLatLngInput),
+                jqLocationText = jqTarget.find(widget.options.selectors.locationText),
+                jqUpdateTrigger = jqTarget.find(widget.options.selectors.updateTrigger),
                 coords = widget._getCookieCoords(),
                 currentLocationString = widget._getCookieLocationString();
 
@@ -111,7 +113,17 @@
             });
 
             // update the placeholders for the user location
-            jqLocationText.text(currentLocationString);
+            jqLocationText.val(currentLocationString).text(currentLocationString);
+
+            // update the text value of the update trigger
+            jqUpdateTrigger.text(widget.options.lang.updateLocationText);
+        },
+
+        _handleLocationChanged: function(event) {
+            var widget = this;
+
+            // render the widget
+            widget.render(event.target);
         },
 
         // process the Update Location button click
