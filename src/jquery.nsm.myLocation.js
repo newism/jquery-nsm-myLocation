@@ -325,7 +325,7 @@
         // get the latidude/longitude from the cookie
         _getCookieCoords: function() {
             var widget = this,
-                latlng = unescape(Cookies.get(widget.options.cookieNameLatLng)),
+                latlng = decodeURIComponent(Cookies.get(widget.options.cookieNameLatLng)),
                 parts = latlng.split('|');
 
             // not enough parts to make a latitude/longitude pair
@@ -345,15 +345,16 @@
         // set the coordinates to the cookie
         _setCookieCoords: function(coords) {
             var widget = this,
-                latlng = escape(coords.latitude + '|' + coords.longitude);
+                latlng = encodeURIComponent(coords.latitude + '|' + coords.longitude);
 
             Cookies.set(widget.options.cookieNameLatLng, latlng);
         },
 
         // get the location string from the cookie
         _getCookieLocationString: function() {
+            // a string replace on the spaces is needed to handle some server-generated cookies
             var widget = this,
-                locationString = unescape(Cookies.get(widget.options.cookieNameText));
+                locationString = decodeURIComponent(Cookies.get(widget.options.cookieNameText)).replace(new RegExp('\\+', 'g'), ' ');
 
             return locationString;
         },
@@ -368,7 +369,7 @@
         // get the status of the location prompt from the cookie
         _getCookieLocationPromptShown: function() {
             var widget = this,
-                cookieValue = unescape(Cookies.get(widget.options.cookieNamePromptShown)),
+                cookieValue = decodeURIComponent(Cookies.get(widget.options.cookieNamePromptShown)),
                 promptShownStatus = (cookieValue > 0 ? true : false);
 
             return promptShownStatus;
