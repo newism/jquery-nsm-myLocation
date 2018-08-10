@@ -1,0 +1,11 @@
+{
+  "name": "jquery-nsm-myLocation",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "iainsaxon <iain.saxon@newism.com.au>",
+  "license": "MIT",
+
+  "devDependencies": {
+    "bower": "^1.8.2"
+  }
+}

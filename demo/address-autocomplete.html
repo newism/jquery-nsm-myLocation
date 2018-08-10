@@ -1,0 +1,77 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Google Reverse Geocode and Address Autocomplete Demo</title>
+</head>
+
+<body>
+
+<div class="MyLocation">
+
+    <form class="AddressAutocomplete" action="#">
+        <p><label>Unit Number or Level Number: <input type="text" name="shipping_address1"/></label></p>
+        <p>
+            <label>Street Number &amp; Street Address: <input type="text" name="address" size="100" autocomplete="false" /></label>
+            <a href="#" class="js-myLocation-trigger">GPS</a>
+        </p>
+        <div>
+            <p>These should be hidden:</p>
+            <p><label>Address2: <input type="text" name="shipping_address2"/></label></p>
+            <p><label>City: <input type="text" name="shipping_city"/></label></p>
+            <p><label>State: <input type="text" name="shipping_state"/></label></p>
+            <p><label>Country: <input type="text" name="shipping_country"/></label></p>
+            <p><label>Postcode: <input type="text" name="shipping_postcode"/></label></p>
+            <p><label>Latitude: <input type="text" name="latitude"/></label></p>
+            <p><label>Longitude: <input type="text" name="longitude"/></label></p>
+            <p>
+                Bounds: Latitude
+                <label>from: <input type="text" name="latitude_from" value=""/></label>
+                <label>to: <input type="text" name="latitude_to" value=""/></label>
+            </p>
+            <p>
+                Bounds: Longitude
+                <label>from: <input type="text" name="longitude_from" value=""/></label>
+                <label>to: <input type="text" name="longitude_to" value=""/></label>
+            </p>
+        </div>
+        <button type="submit">Submit</button>
+
+        <hr />
+
+        <span class="js-myLocation-location">Unknown location</span>
+        <a href="#" class="js-myLocation-trigger">Use precise location</a>
+    </form>
+
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/jquery-ui/ui/core.js"></script>
+    <script src="../bower_components/jquery-ui/ui/widget.js"></script>
+    <script src="../bower_components/js-cookie/src/js.cookie.js"></script>
+    <script src="../src/jquery.nsm.myLocation.js"></script>
+    <script src="../../jquery-nsm-addressAutocomplete/src/jquery.nsm.addressAutocomplete.js"></script>
+
+    <script>
+        $('body').on('contentcreated', function (event) {
+            event.stopPropagation();
+            var $el = $(event.target),
+                addressAutocomplete = $el.find('.AddressAutocomplete').addressAutocomplete(),
+                myLocation = $el.find('.MyLocation').myLocation();
+
+            $el.on('mylocationlocationchanged', function(event, data) {
+                if (!data.location) {
+                    return;
+                }
+
+                addressAutocomplete.addressAutocomplete('place', data.location);
+            });
+
+        }).trigger('contentcreated');
+    </script>
+
+</div>
+
+</body>
+</html>
