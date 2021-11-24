@@ -6,7 +6,7 @@
   "authors": [
     "Leevi Graham <leevi@newism.com.au>"
   ],
-  "license": "MIT",
+  "license": "ISC",
   "private": true,
   "ignore": [
     "**/.*",

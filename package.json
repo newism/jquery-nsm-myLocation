@@ -1,11 +1,19 @@
 {
-  "name": "jquery-nsm-myLocation",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "jquery-nsm-my-location",
+  "version": "1.1.0",
+  "main": "src/jquery.nsm.myLocation.js",
   "author": "iainsaxon <iain.saxon@newism.com.au>",
-  "license": "MIT",
-
+  "private": true,
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/newism/jquery-nsm-myLocation.git"
+  },
+  "dependencies": {
+    "jquery-ui": "^1.13.0",
+    "js-cookie": "^2.1.0"
+  },
   "devDependencies": {
-    "bower": "^1.8.2"
+    "jquery-nsm-addressAutocomplete": "newism/jquery-nsm-addressAutoComplete"
   }
 }
